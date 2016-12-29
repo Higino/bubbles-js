@@ -1,4 +1,8 @@
 (function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe in the global context
+var MAX_PARTICLES = 500;
+var MS_DELAY_BETWEEN_ANIMATION_ROUNDS = 5000;
+var MS_DELAY_BETWEEN_PARTICLES = 100;
+
 //// Particle Object. Defines particles caracteristics. 
 //// Particle is a round object with a specific velocity, mass and position coordinate
 function Particle (mass, position, velocity, color) {
@@ -38,7 +42,7 @@ function Particle (mass, position, velocity, color) {
             this.velocity.y = -this.velocity.y
         }
         this.position.x = (this.position.x + this.momentum().x);
-        this.position.y = (this.position.y + this.momentum().y);
+        this.position.y = (this.position.y + this.momentum().y) -1;
     });
 }).call(Particle.prototype);
 
@@ -48,11 +52,6 @@ var colors = ["#FFABAB", "#FFDAAB", "#DDFFAB", "#ABE4FF", "#D9ABFF"];
 // A universe contains particles and has a boundaries
 window.universe = [];
 universe.boundary = {x: document.getElementById('canvas').width, y: document.getElementById('canvas').height}; // assumes a square starting at (0,0)
-
-
-var MAX_PARTICLES = 500;
-var MS_DELAY_BETWEEN_ANIMATION_ROUNDS = 5000;
-var MS_DELAY_BETWEEN_PARTICLES = 100;
 
 
 // Create particles at random coordinates with random momentum
