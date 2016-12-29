@@ -40,7 +40,9 @@ function Particle (mass, position, velocity, color) {
         if( this.position.y > universe.boundary.y || this.position.y <= 0 ) {
             //Reflect partcile in the universe boundary
             this.velocity.y = -this.velocity.y;
-            this.position.y = universe.boundary.y;
+            if( (this.position.y - universe.boundary.y) > 1 ) { // If position is realy close to edge make it bounce anyway
+                this.position.y = universe.boundary.y - (this.position.y - universe.boundary.y);
+            }
         }
         this.velocity.y = this.velocity.y +1;
         var m = this.momentum();
