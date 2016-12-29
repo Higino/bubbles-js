@@ -8,3 +8,6 @@ A sample javascript canvas bubble animation.
 
 # Live sample
 <canvas id="canvas" width="300" height="200"></canvas>
+<script>
+  console.log("It works");§
+</script>
