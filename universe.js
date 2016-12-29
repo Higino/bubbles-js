@@ -1,8 +1,8 @@
 (function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe in the global context
 var MAX_PARTICLES =500;
-var MS_DELAY_BETWEEN_ANIMATION_ROUNDS = 50000;
-var MS_DELAY_BETWEEN_PARTICLES = 100;
-var GRAVITY = -0.5;
+var MS_DELAY_BETWEEN_ANIMATION_ROUNDS = 5000;
+var MS_DELAY_BETWEEN_PARTICLES = 1000;
+var GRAVITY = 0.5;
 
 //// Particle Object. Defines particles caracteristics. 
 //// Particle is a round object with a specific velocity, mass and position coordinate
@@ -34,17 +34,18 @@ function Particle (mass, position, velocity, color) {
     //Updates particle physics
     this.update || (this.update = function () {
         // Apply newton laws of physics
-        if( this.position.x > universe.boundary.x || this.position.x <= 0 ) {
+        if( this.position.x > universe.boundary.x || this.position.x < 0 ) {
 ;            //Reflect partcile in the universe boundary
             this.velocity.x = -this.velocity.x
         }
-        if( this.position.y > universe.boundary.y || this.position.y <= 0 ) {
+        if( this.position.y > universe.boundary.y || this.position.y < 0 ) {
             //Reflect partcile in the universe boundary
             this.velocity.y = -this.velocity.y;
-            if( (this.position.y - universe.boundary.y) > 1 ) { // If position is realy close to edge make it bounce anyway
-                this.position.y = universe.boundary.y;
+            // TODO: Think in a proper model for physics reflection near boudary. No time now and not important
+            if( (this.position.y - universe.boundary.y) > 0 ) { // If position is realy close to edge make it bounce anyway
+                this.position.y = universe.boundary.y; 
             }
-            if( (this.position.y - universe.boundary.y) < -1 ) { // If position is realy close to edge make it bounce anyway
+            if( (this.position.y - universe.boundary.y) < 0 ) { // If position is realy close to edge make it bounce anyway
                 this.position.y = 0;
             }
         }
@@ -71,7 +72,7 @@ universe.boundary = {x: document.getElementById('canvas').width, y: document.get
                 p.position.x = getRandomIntInclusive(0, universe.boundary.x) || 5;
                 p.position.y = getRandomIntInclusive(0, universe.boundary.y) || 5;
                 p.velocity.x = getRandomIntInclusive(-3, 3) || 1;
-                p.velocity.y = getRandomIntInclusive(-0.5, 0.5) || 1;
+                p.velocity.y = getRandomIntInclusive(-3, 3) || 1;
                 universe.push(p);
             if( universe.length > MAX_PARTICLES ){ // Universe reach its capacity, schedule a reset of it for the next few seconds
                 window.setTimeout(function () {
