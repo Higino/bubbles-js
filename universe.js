@@ -1,6 +1,6 @@
 (function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe in the global context
-var MAX_PARTICLES = 500;
-var MS_DELAY_BETWEEN_ANIMATION_ROUNDS = 5000;
+var MAX_PARTICLES =500;
+var MS_DELAY_BETWEEN_ANIMATION_ROUNDS = 50000;
 var MS_DELAY_BETWEEN_PARTICLES = 100;
 
 //// Particle Object. Defines particles caracteristics. 
@@ -33,16 +33,19 @@ function Particle (mass, position, velocity, color) {
     //Updates particle physics
     this.update || (this.update = function () {
         // Apply newton laws of physics
-        if( this.position.x >= universe.boundary.x || this.position.x <= 0 ) {
-            //Reflect partcile in the universe boundary
+        if( this.position.x > universe.boundary.x || this.position.x <= 0 ) {
+;            //Reflect partcile in the universe boundary
             this.velocity.x = -this.velocity.x
         }
-        if( this.position.y >= universe.boundary.y || this.position.y <= 0 ) {
+        if( this.position.y > universe.boundary.y || this.position.y <= 0 ) {
             //Reflect partcile in the universe boundary
-            this.velocity.y = -this.velocity.y
+            this.velocity.y = -this.velocity.y;
+            this.position.y = universe.boundary.y;
         }
-        this.position.x = (this.position.x + this.momentum().x);
-        this.position.y = (this.position.y + this.momentum().y) -1;
+        this.velocity.y = this.velocity.y +1;
+        var m = this.momentum();
+        this.position.x = (this.position.x + m.x);
+        this.position.y = (this.position.y + m.y);
     });
 }).call(Particle.prototype);
 
@@ -61,8 +64,8 @@ universe.boundary = {x: document.getElementById('canvas').width, y: document.get
             var p = new Particle(1,{x:1,y:0}, {x:1,y:1}, colors[getRandomIntInclusive(0, 4)]);
                 p.position.x = getRandomIntInclusive(0, universe.boundary.x) || 5;
                 p.position.y = getRandomIntInclusive(0, universe.boundary.y) || 5;
-                p.velocity.x = getRandomIntInclusive(-2, 2) || 1;
-                p.velocity.y = getRandomIntInclusive(-2, 2) || 1;
+                p.velocity.x = getRandomIntInclusive(-3, 3) || 1;
+                p.velocity.y = getRandomIntInclusive(-3, 3) || 1;
                 universe.push(p);
             if( universe.length > MAX_PARTICLES ){ // Universe reach its capacity, schedule a reset of it for the next few seconds
                 window.setTimeout(function () {
