@@ -6,3 +6,5 @@ A sample javascript canvas bubble animation.
   -  Animation is reset every the max amount of bubles are created
   -  Gravity pulls bubbles down
 
+# Live sample
+<canvas id="canvas" width="300" height="200"></canvas>
