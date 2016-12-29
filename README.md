@@ -7,7 +7,4 @@ A sample javascript canvas bubble animation.
   -  Gravity pulls bubbles down
 
 # Live sample
-<canvas id="canvas" width="300" height="200"></canvas>
-<script>
-  console.log("It works");§
-</script>
+https://jsfiddle.net/GinoLocoop/k7z6vtp3/
