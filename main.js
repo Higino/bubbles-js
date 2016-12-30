@@ -58,9 +58,6 @@ fieldSet.appendChild(gravityLabel);
 div.appendChild(fieldSet);
 document.body.appendChild(div);
 
-function onDelayBetweenParticlesClick(ev) {
-}
-
 (function init() {
     // Start animation loop
     requestAnimationFrame(function() { // Closure to set context available to animationLoop
