@@ -1,9 +1,4 @@
 (function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe in the global context
-var MAX_PARTICLES =500;
-var MS_DELAY_BETWEEN_ANIMATION_ROUNDS = 5000;
-var MS_DELAY_BETWEEN_PARTICLES = 1000;
-var GRAVITY = 0.5;
-
 //// Particle Object. Defines particles caracteristics. 
 //// Particle is a round object with a specific velocity, mass and position coordinate
 function Particle (mass, position, velocity, color) {
@@ -16,7 +11,7 @@ function Particle (mass, position, velocity, color) {
 (function () {
     // Apply newton second law of physic p=mv
     this.momentum || (this.momentum = function () { 
-    return {x: this.mass*this.velocity.x, y: this.mass*this.velocity.y}});
+    return {x: this.mass*50*this.velocity.x, y: this.mass*50*this.velocity.y}});
     
     // Renders a particle
     this.render || (this.render = function(canvasContext) {
@@ -25,7 +20,7 @@ function Particle (mass, position, velocity, color) {
         canvasContext.beginPath();
         canvasContext.arc(this.position.x, 
                           this.position.y,
-                          3,0,2*Math.PI);
+                          this.mass*5*100,0,2*Math.PI);
         canvasContext.fill();
         canvasContext.stroke();   
         canvasContext.restore();
@@ -68,19 +63,17 @@ universe.boundary = {x: document.getElementById('canvas').width, y: document.get
 (function scheduleParticles() { // Closure to remember interval ID and scheduling of particle creation
     var intervalId = window.setInterval(createParticle, MS_DELAY_BETWEEN_PARTICLES);
     function createParticle(){
-            var p = new Particle(1,{x:1,y:0}, {x:1,y:1}, colors[getRandomIntInclusive(0, 4)]);
+            if( universe.length >= MAX_PARTICLES ){ // Universe reach its capacity, schedule a restart of it for the next few seconds
+                window.clearInterval(intervalId);
+                scheduleParticles();
+                universe.length = 0;
+            }
+            var p = new Particle(getRandomIntInclusive(1, 2)/100,{x:1,y:0}, {x:1,y:1}, colors[getRandomIntInclusive(0, 4)]);
                 p.position.x = getRandomIntInclusive(0, universe.boundary.x) || 5;
                 p.position.y = getRandomIntInclusive(0, universe.boundary.y) || 5;
-                p.velocity.x = getRandomIntInclusive(-3, 3) || 1;
-                p.velocity.y = getRandomIntInclusive(-3, 3) || 1;
+                p.velocity.x = getRandomIntInclusive(-1, 1) || 1;
+                p.velocity.y = getRandomIntInclusive(-1, 1) || 1;
                 universe.push(p);
-            if( universe.length > MAX_PARTICLES ){ // Universe reach its capacity, schedule a reset of it for the next few seconds
-                window.setTimeout(function () {
-                    universe.length = 0;
-                    scheduleParticles();
-                }, MS_DELAY_BETWEEN_ANIMATION_ROUNDS);
-                window.clearInterval(intervalId);
-            }
     }
 }());
 
