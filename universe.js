@@ -1,4 +1,6 @@
 (function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe in the global context
+
+
 //// Particle Object. Defines particles caracteristics. 
 //// Particle is a round object with a specific velocity, mass and position coordinate
 function Particle (mass, position, velocity, color) {
@@ -30,7 +32,7 @@ function Particle (mass, position, velocity, color) {
     this.update || (this.update = function () {
         // Apply newton laws of physics
         if( this.position.x > universe.boundary.x || this.position.x < 0 ) {
-;            //Reflect partcile in the universe boundary
+            //Reflect partcile in the universe boundary
             this.velocity.x = -this.velocity.x
         }
         if( this.position.y > universe.boundary.y || this.position.y < 0 ) {
