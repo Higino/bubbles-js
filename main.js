@@ -21,22 +21,8 @@ var div = document.createElement("div");
 var fieldSet = document.createElement("fieldSet");
 var numBubblesElement = document.createElement("input");
 numBubblesElement.value = MAX_PARTICLES;
-var numBubblesButton = document.createElement("button");
-numBubblesButton.innerText = "Set bubble #";
-numBubblesButton.addEventListener("click", function () {
-    MAX_PARTICLES = Number(numBubblesElement.value) || 2;
-    universe.length = MAX_PARTICLES; // Universe reached its end :-D. It will reset itself
-    numBubblesElement.value = MAX_PARTICLES;
-});
 var delayBetweenParticlesElement = document.createElement("input");
 delayBetweenParticlesElement.value = MS_DELAY_BETWEEN_PARTICLES;
-var delayBetweenParticlesButton = document.createElement("button");
-delayBetweenParticlesButton.innerText = "Set delay between bubbles";
-delayBetweenParticlesButton.addEventListener("click", function () {
-    MS_DELAY_BETWEEN_PARTICLES = Number(delayBetweenParticlesElement.value) || 3000;
-    universe.length = MAX_PARTICLES; // Universe reached its end :-D. It will reset itself   
-    delayBetweenParticlesElement.value = MS_DELAY_BETWEEN_PARTICLES; 
-});
 var gravityElement = document.createElement("input");
 gravityElement.setAttribute("type" , "range");
 gravityElement.setAttribute("min", "-10");
@@ -49,22 +35,25 @@ gravityElement.addEventListener("pointermove", function () {
 var gravityLabel = document.createElement("label");
 gravityLabel.innerText = "Gravity: " + gravityElement.value/10;
 
-var gravityButton = document.createElement("button");
-gravityButton.innerText = "Set gravity";
-gravityButton.addEventListener("Click", function () {
-    GRAVITY = Number(gravityElement.value/10) || 0;
-    gravityLabel.innerText = "Gravity: " + GRAVITY;
-});
-
 fieldSet.appendChild(delayBetweenParticlesElement);
-fieldSet.appendChild(delayBetweenParticlesButton);
 fieldSet.appendChild(document.createElement("br"));
 fieldSet.appendChild(numBubblesElement);
-fieldSet.appendChild(numBubblesButton);
 fieldSet.appendChild(document.createElement("br"));
 fieldSet.appendChild(gravityElement);
 fieldSet.appendChild(gravityLabel);
-fieldSet.appendChild(gravityButton);
+fieldSet.appendChild(document.createElement("br"));
+var delayBetweenParticlesButton = document.createElement("button");
+delayBetweenParticlesButton.innerText = "Reset animation and set properties";
+delayBetweenParticlesButton.addEventListener("click", function () {
+    MAX_PARTICLES = Number(numBubblesElement.value) || 2;
+    MS_DELAY_BETWEEN_PARTICLES = Number(delayBetweenParticlesElement.value) || 3000;
+    GRAVITY = Number(gravityElement.value/10) || 0;
+    gravityLabel.innerText = "Gravity: " + GRAVITY;
+    universe.length = MAX_PARTICLES; // Universe reached its end :-D. It will reset itself   
+    delayBetweenParticlesElement.value = MS_DELAY_BETWEEN_PARTICLES; 
+});
+fieldSet.appendChild(delayBetweenParticlesButton);
+
 div.appendChild(fieldSet);
 document.body.appendChild(div);
 
