@@ -4,7 +4,7 @@
     var global = this;
     global.MAX_PARTICLES = global.MAX_PARTICLES || 100; // Maximum number of particles to be draw
     global.MS_DELAY_BETWEEN_PARTICLES = global.MS_DELAY_BETWEEN_PARTICLES || 200; // Miliseconds to wait before drawing a new particle
-    global.GRAVITY = global.GRAVITY || 0.2; // Self explanatory. Negative gravituis implies bubbles will go up
+    global.GRAVITY = global.GRAVITY || 0; // Self explanatory. Negative gravituis implies bubbles will go up
 
 // Check that a canvas exist otherwise create it
 var canvas = document.getElementById('canvas');
@@ -49,12 +49,22 @@ gravityElement.addEventListener("pointermove", function () {
 var gravityLabel = document.createElement("label");
 gravityLabel.innerText = "Gravity: " + gravityElement.value/10;
 
-fieldSet.appendChild(delayBetweenParticlesButton);
+var gravityButton = document.createElement("button");
+gravityButton.innerText = "Set gravity";
+gravityButton.addEventListener("Click", function () {
+    GRAVITY = Number(gravityElement.value/10) || 0;
+    gravityLabel.innerText = "Gravity: " + GRAVITY;
+});
+
 fieldSet.appendChild(delayBetweenParticlesElement);
-fieldSet.appendChild(numBubblesButton);
+fieldSet.appendChild(delayBetweenParticlesButton);
+fieldSet.appendChild(document.createElement("br"));
 fieldSet.appendChild(numBubblesElement);
+fieldSet.appendChild(numBubblesButton);
+fieldSet.appendChild(document.createElement("br"));
 fieldSet.appendChild(gravityElement);
 fieldSet.appendChild(gravityLabel);
+fieldSet.appendChild(gravityButton);
 div.appendChild(fieldSet);
 document.body.appendChild(div);
 
