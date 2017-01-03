@@ -36,15 +36,21 @@ var gravityLabel = document.createElement("label");
 gravityLabel.innerText = "Gravity: " + gravityElement.value/10;
 
 fieldSet.appendChild(delayBetweenParticlesElement);
+var delayBetweenParticlesLabel = document.createElement("label");
+delayBetweenParticlesLabel.innerText = " - Delay between bubbles"
+fieldSet.appendChild(delayBetweenParticlesLabel);
 fieldSet.appendChild(document.createElement("br"));
 fieldSet.appendChild(numBubblesElement);
+var numBubblesLabel = document.createElement("label");
+numBubblesLabel.innerText = " - Number of bubbles"
+fieldSet.appendChild(numBubblesLabel);
 fieldSet.appendChild(document.createElement("br"));
 fieldSet.appendChild(gravityElement);
 fieldSet.appendChild(gravityLabel);
 fieldSet.appendChild(document.createElement("br"));
-var delayBetweenParticlesButton = document.createElement("button");
-delayBetweenParticlesButton.innerText = "Reset animation and set properties";
-delayBetweenParticlesButton.addEventListener("click", function () {
+var resetAndApply = document.createElement("button");
+resetAndApply.innerText = "Reset animation and set properties";
+resetAndApply.addEventListener("click", function () {
     MAX_PARTICLES = Number(numBubblesElement.value) || 2;
     MS_DELAY_BETWEEN_PARTICLES = Number(delayBetweenParticlesElement.value) || 3000;
     GRAVITY = Number(gravityElement.value/10) || 0;
@@ -52,7 +58,7 @@ delayBetweenParticlesButton.addEventListener("click", function () {
     universe.length = MAX_PARTICLES; // Universe reached its end :-D. It will reset itself   
     delayBetweenParticlesElement.value = MS_DELAY_BETWEEN_PARTICLES; 
 });
-fieldSet.appendChild(delayBetweenParticlesButton);
+fieldSet.appendChild(resetAndApply);
 
 div.appendChild(fieldSet);
 document.body.appendChild(div);
