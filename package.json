@@ -1,0 +1,19 @@
+{
+  "name": "bubbles-js",
+  "version": "1.0.0",
+  "description": "A sample javascript canvas bubble animation.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Higino/bubbles-js.git"
+  },
+  "author": "Higino Silva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Higino/bubbles-js/issues"
+  },
+  "homepage": "https://github.com/Higino/bubbles-js#readme"
+}
