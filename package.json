@@ -4,6 +4,9 @@
   "description": "A sample javascript canvas bubble animation.",
   "main": "main.js",
   "scripts": {
+    "start": "webpack && cp src/index.html dist/index.html",
+    "build": "webpack -d",
+    "build:prod": "webpack -p && cp src/index.html dist/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Higino/bubbles-js/issues"
   },
-  "homepage": "https://github.com/Higino/bubbles-js#readme"
+  "homepage": "https://github.com/Higino/bubbles-js#readme",
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  }
 }

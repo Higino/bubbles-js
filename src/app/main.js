@@ -1,6 +1,6 @@
 
-
-(function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe in the global context
+(function () { // Avoid functions or variable namess collision with other libraries. Assumes a Universe in the global context
+    require('./universe.js');
     var global = this;
     global.MAX_PARTICLES = global.MAX_PARTICLES || 100; // Maximum number of particles to be draw
     global.MS_DELAY_BETWEEN_PARTICLES = global.MS_DELAY_BETWEEN_PARTICLES || 200; // Miliseconds to wait before drawing a new particle

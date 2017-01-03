@@ -1,5 +1,6 @@
-(function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe in the global context
+(function () { // Avoid functions or variable namess collision with otheer libraries. Assumes a Universe configurations are in the global context
 
+var global = this;
 
 //// Particle Object. Defines particles caracteristics. 
 //// Particle is a round object with a specific velocity, mass and position coordinate
@@ -46,7 +47,7 @@ function Particle (mass, position, velocity, color) {
                 this.position.y = 0;
             }
         }
-        this.velocity.y = this.velocity.y + GRAVITY;
+        this.velocity.y = this.velocity.y + global.GRAVITY;
         var m = this.momentum();
         this.position.x = (this.position.x + m.x);
         this.position.y = (this.position.y + m.y);
@@ -63,9 +64,9 @@ universe.boundary = {x: document.getElementById('canvas').width, y: document.get
 
 // Create particles at random coordinates with random momentum
 (function scheduleParticles() { // Closure to remember interval ID and scheduling of particle creation
-    var intervalId = window.setInterval(createParticle, MS_DELAY_BETWEEN_PARTICLES);
+    var intervalId = window.setInterval(createParticle, global.MS_DELAY_BETWEEN_PARTICLES);
     function createParticle(){
-            if( universe.length >= MAX_PARTICLES ){ // Universe reach its capacity, schedule a restart of it for the next few seconds
+            if( universe.length >= global.MAX_PARTICLES ){ // Universe reach its capacity, schedule a restart of it for the next few seconds
                 window.clearInterval(intervalId);
                 scheduleParticles();
                 universe.length = 0;
