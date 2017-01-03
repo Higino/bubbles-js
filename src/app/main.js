@@ -1,4 +1,4 @@
-
+// Module that created UI elements and sets our universe // 
 (function () { // Avoid functions or variable namess collision with other libraries. Assumes a Universe in the global context
     require('./universe.js');
     var global = this;
