@@ -14,5 +14,7 @@ https://jsfiddle.net/GinoLocoop/k7z6vtp3/
 
 #Instalation instructions
 $> npm install
+
 $> npm start
+
 $> open dist/index.html
