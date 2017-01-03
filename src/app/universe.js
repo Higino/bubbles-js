@@ -4,8 +4,6 @@ var Particle = require('./Particle.js');
 var u = require('./util.js');
 var global = this;
 
-//An array for the random colors
-var colors = ["#FFABAB", "#FFDAAB", "#DDFFAB", "#ABE4FF", "#D9ABFF"];
 
 // A universe contains particles and has a boundaries
 window.universe = [];
@@ -21,7 +19,7 @@ universe.boundary = {x: document.getElementById('canvas').width, y: document.get
                 scheduleParticles();
                 universe.length = 0;
             }
-            var p = new Particle(u.getRandomIntInclusive(1, 2)/100,{x:1,y:0}, {x:1,y:1}, colors[u.getRandomIntInclusive(0, 4)]);
+            var p = new Particle(u.getRandomIntInclusive(1, 2)/100,{x:1,y:0}, {x:1,y:1}, u.colors[u.getRandomIntInclusive(0, 4)]);
             p.position.x = u.getRandomIntInclusive(0, universe.boundary.x) || 5;
             p.position.y = u.getRandomIntInclusive(0, universe.boundary.y) || 5;
             p.velocity.x = u.getRandomIntInclusive(-1, 1) || 1;
